@@ -4,13 +4,26 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="stylesheet" href="/stylesheets/style.css">
+		<script src="/javascripts/three.min.js"></script>
 		<style>
+			.page {
+				z-index: 4;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+			}
+			.mode-switcher {
+				margin-bottom: 20px;
+			}
 		</style>
 	</head>
 	<body>
-		<h1>Social graffiti</h1>
-		<script>
-			window.addEventListener('DOMContentLoaded', () => {
+		<script type="module">
+			import IndexPage from './IndexPage.js'
+			document.addEventListener('DOMContentLoaded', ev => {
+				window.page = new IndexPage()
+				document.body.appendChild(window.page.el)
 			})
 		</script>
 	</body>
