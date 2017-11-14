@@ -40,17 +40,17 @@ li {
 	display: inline-block;
 }
 
-button {
+button, .button {
 	cursor: pointer;
 	background-color: white;
 	padding: 5px;
 	border: solid 1px #DDD;
 	border-radius: 0;
 }
-button:hover {
+button:hover, .button:hover {
 	background-color: #DDD;
 }
-button:active {
+button:active, .button:active {
 	background-color: #EFEFEF;
 }
 
@@ -232,4 +232,22 @@ button:active {
 .account-component .logout-button {
 	color: red;
 	margin-bottom: 9px;
+}
+
+.splash-component .paint-button {
+	font-size: 20px;
+	line-height: 20px;
+	display: inline-block;
+	font-weight: 400;
+	padding: 30px;
+	color: white;
+	background-color: green;
+	margin: 30px 0 50px 0;
+}
+
+.splash-component .welcome-message {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 30px;
+	margin: 30px 0 50px 0;
 }

@@ -41,7 +41,7 @@ export default class IndexPage extends Page {
 		this.savePaintingComponent = new SavePaintingComponent()
 		this.centerCol.appendChild(this.savePaintingComponent.el)
 
-		this.splashComponent = new SplashComponent()
+		this.splashComponent = new SplashComponent(this._user)
 		this.centerCol.appendChild(this.splashComponent.el)
 
 		// Set up our URL router to handle view switching
