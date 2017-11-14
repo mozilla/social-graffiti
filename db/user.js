@@ -20,11 +20,9 @@ function generateCode(){
 }
 
 module.exports = (sequelize, DataTypes) => {
-	let User = sequelize.define('User', {
+	return sequelize.define('User', {
 		uuid:  { type: DataTypes.STRING, primaryKey: true, defaultValue: uuid },
 		email: { type: DataTypes.STRING, unique: true },
 		code:  { type: DataTypes.STRING, unique: true, defaultValue: generateCode }
 	});
-
-	return User;
 };
