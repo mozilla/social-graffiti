@@ -7,6 +7,7 @@ SavePaintingComponent renders the form for a user to name and save an a-painter 
 export default class SavePaintingComponent extends Component {
 	constructor(dataObject=null, options={}){
 		super(dataObject, options)
+		this.el.addClass('save-painting-component')
 		this.el.appendChild(el.div('Save'))
 	}
 }

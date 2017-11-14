@@ -53,11 +53,11 @@ let DataObject = EventMixin(
 				credentials: 'same-origin'
 			}
 		}
-		fetch(){
+		fetch(additionalOptions={}, overrideURL=null){
 			// Ask the server for data for this model or collection
 			return new Promise(function(resolve, reject){
 				this.trigger('fetching', this)
-				this._innerFetch(this.url, this.fetchOptions).then(response => {
+				this._innerFetch(overrideURL || this.url, Object.assign({}, this.fetchOptions, additionalOptions)).then(response => {
 					if(response.status != 200){
 						throw 'Fetch failed with status ' + response.status
 					}
@@ -80,7 +80,6 @@ let DataObject = EventMixin(
 		For example, MockService overrides this to intercept fetch calls and return its own responses for matched endpoints
 		*/
 		_innerFetch(...params){
-			console.log('DO inner fetch')
 			return fetch(...params)
 		}
 

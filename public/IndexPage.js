@@ -12,13 +12,16 @@ import AccountComponent from './javascripts/components/AccountComponent.js'
 import MainNavComponent from './javascripts/components/MainNavComponent.js'
 import SavePaintingComponent from './javascripts/components/SavePaintingComponent.js'
 
+import {User} from './javascripts/models/User.js'
+
 export default class IndexPage extends Page {
 	constructor(){
 		super()
 		this.el.addClass('index-page')
+		this._user = User.getSharedUser()
 
 		// Set up the navbar at the top during flat and overlay and the main nav in the controlGroup when scenic
-		this.mainNavComponent = new MainNavComponent()
+		this.mainNavComponent = new MainNavComponent(this._user)
 		this.el.appendChild(this.mainNavComponent.el)
 
 		// Create one row with a single center column
@@ -29,10 +32,10 @@ export default class IndexPage extends Page {
 			{ class: 'col-12' }
 		).appendTo(this.row)
 
-		this.loginComponent = new LoginComponent()
+		this.loginComponent = new LoginComponent(this._user)
 		this.centerCol.appendChild(this.loginComponent.el)
 
-		this.accountComponent = new AccountComponent()
+		this.accountComponent = new AccountComponent(this._user)
 		this.centerCol.appendChild(this.accountComponent.el)
 
 		this.savePaintingComponent = new SavePaintingComponent()
@@ -52,12 +55,24 @@ export default class IndexPage extends Page {
 	_handleRoutes(eventName, path, ...params){
 		switch(eventName){
 			case 'login':
+				if(this._user.authed){
+					document.location.href = '#account'
+					return
+				}
 				this._showLogin(...params)
 				break
 			case 'account':
+				if(this._user.authed === false){
+					document.location.href = '#login'
+					return
+				}
 				this._showAccount(...params)
 				break
 			case 'save-painting':
+				if(this._user.authed === false){
+					document.location.href = '#login'
+					return
+				}
 				this._showSavePainting(...params)
 				break
 			case 'splash':

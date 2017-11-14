@@ -81,6 +81,9 @@ button:active {
 .form-group label {
 	display: none;
 }
+.form-group .error {
+	color: red;
+}
 .form-group input, .form-group textarea {
 	width: 100%;
 	padding: 8px;
@@ -181,14 +184,19 @@ button:active {
 	transform: translate(-50%, -50%);
 }
 
-.login-component {
+.login-component .form-group {
 	width: 100%;
-	max-width: 20em;
+	max-width: 25em;
+	margin-bottom: 90px;
 }
-.login-component .error {
-	font-size: 14px;
-	margin-bottom: 12px;
-	color: red;
+.login-component .form-group input[type=text], .login-component .form-group input[type=email] {
+	margin: 8px 0;
+}
+.login-component .form-group p {
+	margin-top: 4px;
+}
+.login-component .form-group button {
+	float: right;
 }
 
 /* Handy display mode exclusion and inclusion classes */
@@ -209,4 +217,19 @@ button:active {
 
 .overlay {
 	margin: 20% 20px;
+}
+
+
+.account-component .info {
+	margin: 8px 0;
+}
+.account-component .account-code {
+	font-size: 40px;
+	font-weight: 400;
+	margin-bottom: 60px;
+}
+
+.account-component .logout-button {
+	color: red;
+	margin-bottom: 9px;
 }

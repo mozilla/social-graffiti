@@ -1,18 +1,23 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
 
-var users = require('./routes/users');
+// Require the routes
+const users = require('./routes/users');
 
+// Start the DB
+const {db} = require('./db/sequelize');
+
+// Now start the app
 var app = express();
 
 // We use static HTML from /public instead of pug for everything except the error page
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -22,8 +27,8 @@ app.use(cookieParser());
 // Serve static files other than HTML
 app.use(express.static(path.join(__dirname, 'public')));
 
-// API routes
-app.use('/users', users);
+// Set up the routes
+app.use('/api/user', users);
 
 // Serve static HTML
 var options = {
