@@ -20,8 +20,25 @@ let Content = class extends DataModel {
 let Contents = class extends DataCollection {
 	constructor(data=[], options={}){
 		super(data, Object.assign({ dataObject: Content }, options))
+		this._locationFilter = null
 	}
-	get url(){ return apiBaseURL + 'content/'}
+	addLocationFilter(latitude, longitude, radius){
+		this._locationFilter = {
+			latitude: latitude,
+			longitude: longitude,
+			radius: radius
+		}
+	}
+	removeLocationFilter(){
+		this._locationFilter = null
+	}
+	get url(){
+		let result = apiBaseURL + 'content/'
+		if(this._locationFilter !== null){
+			result += `?latitude=${this._locationFilter.latitude}&longitude=${this._locationFilter.longitude}&radius=${this._locationFilter.radius}`
+		}
+		return result
+	}
 }
 
 export {Content, Contents}

@@ -30,7 +30,7 @@ db.User.sync().then(() => {
 	db.Content.sync().then(() => {
 		db.Anchor.sync().then(() => {
 			db.AnchoredContent.sync().then(() => {
-				//createTestData()
+				createTestData()
 			})
 		})
 	})
@@ -42,14 +42,43 @@ function createTestData(){
 	const user1 = db.User.build({ email: 'foo@example.com' })
 	user1.save().then(user => {
 		const anchor1 = db.Anchor.build({
-			latitude: 123,
-			longitude: 321,
+			latitude: 47.56651316994803,
+			longitude: -122.36845903027162,
 			altitude: 111,
 			positionAccuracy: 100,
 			altitudeAccuracy: 200,
 			orientation: [0,0,0,1]
 		})
 		anchor1.save().then(anchor => {
+			anchor.setOwner(user)
+			const content = db.Content.build({
+				name: 'Content 1'
+			})
+			content.save().then(content => {
+				content.setOwner(user)
+				const anchoredContent = db.AnchoredContent.build({
+					transform: [
+						1, 0, 0, 0,
+						0, 1, 0, 0,
+						0, 0, 1, 0,
+						0, 0, 0, 1
+					]
+				})
+				anchoredContent.save().then(ac => {
+					ac.setAnchor(anchor)
+					ac.setContent(content)
+				})
+			})
+		})
+		const anchor2 = db.Anchor.build({
+			latitude: 47.56651316994803,
+			longitude: -122.36845903027162,
+			altitude: 121,
+			positionAccuracy: 10,
+			altitudeAccuracy: 20,
+			orientation: [0,0,0,1]
+		})
+		anchor2.save().then(anchor => {
 			anchor.setOwner(user)
 		})
 	})

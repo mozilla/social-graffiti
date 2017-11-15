@@ -7,17 +7,17 @@ const {offsetLatLonByMeters, parseLocationParameters} = require('./geo');
 
 const router = express.Router();
 
-const anchorListLimit = 200
+const listLimit = 200
 
 /* Get a list of nearby Anchors */
 router.get('/', (request, response, next) => {
   const locationParams = parseLocationParameters(request.query)
   if(locationParams){
-    var anchorQuery = findAnchorsByLocation(locationParams.latitude, locationParams.longitude, locationParams.radius)
+    var query = findContentsByLocation(locationParams.latitude, locationParams.longitude, locationParams.radius)
   } else {
-    var anchorQuery = db.Anchor.findAll({ limit: anchorListLimit })
+    var query = db.Anchor.findAll({ limit: listLimit })
   }
-  anchorQuery.then(data => {
+  query.then(data => {
     response.status(200).json(data)
   }).catch(err => {
     console.log('err', err)
@@ -30,8 +30,23 @@ router.get('/', (request, response, next) => {
 
 module.exports = router;
 
+function findContentsByLocation(latitude, longitude, radius, response){
+  return new Promise((resolve, reject) => {
+    findAnchorsByLocation(latitude, longitude, radius, response).then(anchors => {
+      let preppedIds = '(' + anchors.map(anchor => { return `'${anchor.uuid}'` }).join(',') + ')'
+      db.sequelize.query(
+        `SELECT content.* FROM contents as content, anchoredContents as anchoredContent 
+            where (content.uuid = anchoredContent.contentUuid 
+            AND anchoredContent.anchorUuid in ${preppedIds}) LIMIT 200
+          `, { model: db.Content }).then(contents => {resolve(contents) }).catch(err => { reject(err) })
+    }).catch(err => {
+      reject(err)
+    })
+  })
+}
+
 /*
-For simplicity, find anchors within a square of side 2*radius around the lat/lon.
+For simplicity, search within a square of side 2*radius around the lat/lon.
 */
 function findAnchorsByLocation(latitude, longitude, radius, response){
   const northWestCorner = offsetLatLonByMeters(latitude, longitude, -radius, -radius)
@@ -41,7 +56,7 @@ function findAnchorsByLocation(latitude, longitude, radius, response){
   let sortedLongitude = [northWestCorner.longitude, southEastCorner.longitude]
   sortedLongitude.sort(function(a,b){return a - b})
   return db.Anchor.findAll({
-    limit: anchorListLimit,
+    limit: listLimit,
     where: {
       [Op.and]: [
         { 

@@ -43,7 +43,7 @@ let CollectionComponent = class extends Component {
 		return this._ul.children.item(index).component
 	}
 	componentForDataObject(dataObject){
-		return this._dataObjectComponents.get(dataObject.get('id'))
+		return this._dataObjectComponents.get(dataObject.get('uuid'))
 	}
 	_handleCollectionAdded(eventName, collection, dataObject){
 		this._add(this._createItemComponent(dataObject))
@@ -62,6 +62,7 @@ let CollectionComponent = class extends Component {
 			this._remove(itemComponent)
 		}
 		this._dataObjectComponents.clear()
+		console.log('length', this.dataObject.length)
 		for(let dataObject of this.dataObject){
 			this._add(this._createItemComponent(dataObject))
 		}
@@ -75,11 +76,11 @@ let CollectionComponent = class extends Component {
 		}
 	}
 	_add(itemComponent){
-		if(this._dataObjectComponents.get(itemComponent.dataObject.get('id'))){
+		if(this._dataObjectComponents.get(itemComponent.dataObject.get('uuid'))){
 			// Already have it, ignore the add
 			return
 		}
-		this._dataObjectComponents.set(itemComponent.dataObject.get('id'), itemComponent)
+		this._dataObjectComponents.set(itemComponent.dataObject.get('uuid'), itemComponent)
 		this._ul.appendChild(itemComponent.el)
 		if(this.options.onClick){
 			itemComponent.el.addEventListener('click', (ev) => { this._handleItemClick(ev, itemComponent) })
@@ -87,14 +88,14 @@ let CollectionComponent = class extends Component {
 		itemComponent.dataObject.addListener(this._handleDeleted.bind(this), 'deleted', true)
 	}
 	_remove(itemComponent){
-		this._dataObjectComponents.delete(itemComponent.dataObject.get('id'))
+		this._dataObjectComponents.delete(itemComponent.dataObject.get('uuid'))
 		this._ul.removeChild(itemComponent.el)
 		itemComponent.el.removeEventListener('click', null)
 		itemComponent.cleanup()
 	}
 	_handleDeleted(eventName, dataObject, error){
 		if(error) return
-		let component = this._dataObjectComponents.get(dataObject.get('id'))
+		let component = this._dataObjectComponents.get(dataObject.get('uuid'))
 		if(component){
 			this._remove(component)
 		}
@@ -106,7 +107,7 @@ let CollectionComponent = class extends Component {
 			var options = {}
 		}
 		if(this.options.itemComponent){
-			var itemComponent = this.options.itemComponent(itemDataObject, options)
+			var itemComponent = new this.options.itemComponent(itemDataObject, options)
 		} else {
 			var itemComponent = new DefaultItemComponent(itemDataObject, options)
 		}

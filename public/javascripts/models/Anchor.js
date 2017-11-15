@@ -20,8 +20,25 @@ let Anchor = class extends DataModel {
 let Anchors = class extends DataCollection {
 	constructor(data=[], options={}){
 		super(data, Object.assign({ dataObject: Anchor }, options))
+		this._locationFilter = null
 	}
-	get url(){ return apiBaseURL + 'anchor/'}
+	addLocationFilter(latitude, longitude, radius){
+		this._locationFilter = {
+			latitude: latitude,
+			longitude: longitude,
+			radius: radius
+		}
+	}
+	removeLocationFilter(){
+		this._locationFilter = null
+	}
+	get url(){
+		let result = apiBaseURL + 'anchor/'
+		if(this._locationFilter !== null){
+			result += `?latitude=${this._locationFilter.latitude}&longitude=${this._locationFilter.longitude}&radius=${this._locationFilter.radius}`
+		}
+		return result
+	}
 }
 
 export {Anchor, Anchors}
