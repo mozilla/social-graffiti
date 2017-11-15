@@ -30,6 +30,7 @@ export default class SplashComponent extends Component {
 		this.nearbyPaintings = new CollectionComponent(this._contents, {
 			itemComponent: NearbyPaintingItem
 		})
+		this.nearbyPaintings.el.addClass('nearby-paintings')
 		this.el.appendChild(this.nearbyPaintings.el)
 
 		this._checkAuthed()
@@ -84,6 +85,9 @@ export default class SplashComponent extends Component {
 let NearbyPaintingItem = class extends Component {
 	constructor(dataObject, options={}){
 		super(dataObject, options)
-		this.el.appendChild(el.div(dataObject.get('name')))
+		this.el.addClass('nearby-painting-item')
+		this.editButton = el.a({ class: 'edit-button button', href: `/paint/?url=${encodeURIComponent(dataObject.get('url'))}` }, 'VIEW').appendTo(this.el)
+		this.nameEl = el.h3({ class: 'name' }, dataObject.get('name')).appendTo(this.el)
+		this.ownerEl = el.div({ class: 'owner' }, dataObject.get('ownerEmail').split('@')[0]).appendTo(this.el)
 	}
 }

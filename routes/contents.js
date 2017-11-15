@@ -18,9 +18,12 @@ router.get('/', (request, response, next) => {
     var query = db.Anchor.findAll({ limit: listLimit })
   }
   query.then(data => {
-    response.status(200).json(data)
+    decorateContentsWithUsers(data).then(contents => {
+      console.log(contents)
+      response.status(200).json(contents)
+    })
   }).catch(err => {
-    console.log('err', err)
+    console.error('err', err)
     res.status(500).send({
       error: err
     });
@@ -29,6 +32,24 @@ router.get('/', (request, response, next) => {
 });
 
 module.exports = router;
+
+function decorateContentsWithUsers(contents){
+  return new Promise((resolve, reject) => {
+    const userUUIDs = contents.map(content => { return content.ownerUuid })
+    db.User.findAll({
+      where: { uuid: { [Op.in]: userUUIDs }}
+    }).then(users => {
+      const userMap = new Map()
+      users.forEach(user => {
+        userMap.set(user.uuid, user)
+      })
+      contents.forEach(content => {
+        content.dataValues.ownerEmail = userMap.get(content.ownerUuid).email
+      })
+      resolve(contents)
+    })
+  })
+}
 
 function findContentsByLocation(latitude, longitude, radius, response){
   return new Promise((resolve, reject) => {

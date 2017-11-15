@@ -13,6 +13,7 @@ Fields:
 module.exports = (sequelize, DataTypes) => {
 	return sequelize.define('content', {
 		uuid: { type: DataTypes.STRING, primaryKey: true, defaultValue: uuid },
-		name: { type: DataTypes.STRING }
+		name: { type: DataTypes.STRING },
+		url: { type: DataTypes.STRING }
 	});
 };

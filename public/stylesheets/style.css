@@ -241,8 +241,11 @@ button:active, .button:active {
 	font-weight: 400;
 	padding: 30px;
 	color: white;
+	text-align: center;
 	background-color: green;
 	margin: 30px 0 50px 0;
+	width: 100%;
+	max-width: 300px;
 }
 
 .splash-component .welcome-message {
@@ -250,4 +253,29 @@ button:active, .button:active {
 	font-weight: 300;
 	line-height: 30px;
 	margin: 30px 0 50px 0;
+}
+
+.nearby-paintings {
+	margin-top: 10px;
+}
+
+.nearby-painting-item {
+	margin-bottom: 20px;
+	padding: 8px;
+	border: solid 1px #EFEFEF;
+	width: 100%;
+	max-width: 340px;
+}
+.nearby-painting-item .name {
+	font-size: 18px;
+	font-weight: 400;
+	margin-bottom: 5px;
+}
+.nearby-painting-item .edit-button {
+	float: right;
+	font-size: 14px;
+	height: 26px;
+	line-height: 29px;
+	background-color: green;
+	color: white;
 }

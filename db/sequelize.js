@@ -26,14 +26,8 @@ db.AnchoredContent = sequelize.import(path.join(__dirname, 'anchoredContent.js')
 db.AnchoredContent.belongsTo(db.Anchor)
 db.AnchoredContent.belongsTo(db.Content)
 
-db.User.sync().then(() => {
-	db.Content.sync().then(() => {
-		db.Anchor.sync().then(() => {
-			db.AnchoredContent.sync().then(() => {
-				createTestData()
-			})
-		})
-	})
+db.sequelize.sync().then(() => {
+	createTestData()
 })
 
 module.exports = { db };
@@ -52,7 +46,8 @@ function createTestData(){
 		anchor1.save().then(anchor => {
 			anchor.setOwner(user)
 			const content = db.Content.build({
-				name: 'Content 1'
+				name: 'Content 1',
+				url: 'https://ucarecdn.com/be5a0897-1981-4046-b5a2-6c8b34de3e1e/'
 			})
 			content.save().then(content => {
 				content.setOwner(user)
