@@ -13,7 +13,7 @@ Fields:
 */
 let Anchor = class extends DataModel {
 	get url(){
-		if(this.isNew || this.get('uuid') === null) return apiBaseURL + 'user/'
+		if(this.isNew || this.get('uuid') === null) return apiBaseURL + 'anchor/'
 		return apiBaseURL + 'anchor/' + this.get('uuid')
 	}
 }

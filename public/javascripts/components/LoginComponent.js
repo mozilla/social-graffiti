@@ -21,6 +21,7 @@ export default class LoginComponent extends Component {
 		this.joinError = el.div({ class: 'error' }).appendTo(this.joinForm)
 		this.joinButton = el.button({ type: 'submit' }, 'JOIN').appendTo(this.joinForm)
 		this.listenTo('click', this.joinButton, this._handleJoinClick)
+		this.listenTo('submit', this.joinForm, this._handleJoinClick)
 
 		this.linkForm = el.form(
 			{ class: 'link-form form-group' },
@@ -35,6 +36,7 @@ export default class LoginComponent extends Component {
 		this.linkError = el.div({ class: 'error' }).appendTo(this.linkForm)
 		this.linkButton = el.button({ type: 'submit' }, 'LINK').appendTo(this.linkForm)
 		this.listenTo('click', this.linkButton, this._handleLinkClick)
+		this.listenTo('submit', this.linkForm, this._handleLinkClick)
 	}
 	_handleJoinClick(ev){
 		ev.preventDefault()

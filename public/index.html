@@ -5,6 +5,10 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="stylesheet" href="/stylesheets/style.css">
 		<script src="/javascripts/three.min.js"></script>
+
+		<script type="module" src="IndexPage.js"></script>
+		<script nomodule src="./site.js"></script>
+
 		<style>
 			.page {
 				z-index: 4;
@@ -21,6 +25,12 @@
 	<body>
 		<script type="module">
 			import IndexPage from './IndexPage.js'
+			document.addEventListener('DOMContentLoaded', ev => {
+				window.page = new IndexPage()
+				document.body.appendChild(window.page.el)
+			})
+		</script>
+		<script nomodule>
 			document.addEventListener('DOMContentLoaded', ev => {
 				window.page = new IndexPage()
 				document.body.appendChild(window.page.el)

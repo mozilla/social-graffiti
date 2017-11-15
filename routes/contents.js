@@ -19,7 +19,6 @@ router.get('/', (request, response, next) => {
   }
   query.then(data => {
     decorateContentsWithUsers(data).then(contents => {
-      console.log(contents)
       response.status(200).json(contents)
     })
   }).catch(err => {
@@ -58,7 +57,7 @@ function findContentsByLocation(latitude, longitude, radius, response){
       db.sequelize.query(
         `SELECT content.* FROM contents as content, anchoredContents as anchoredContent 
             where (content.uuid = anchoredContent.contentUuid 
-            AND anchoredContent.anchorUuid in ${preppedIds}) LIMIT 200
+            AND anchoredContent.anchorUuid in ${preppedIds}) ORDER BY content.createdAt DESC LIMIT 200
           `, { model: db.Content }).then(contents => {resolve(contents) }).catch(err => { reject(err) })
     }).catch(err => {
       reject(err)

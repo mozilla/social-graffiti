@@ -62,7 +62,6 @@ let CollectionComponent = class extends Component {
 			this._remove(itemComponent)
 		}
 		this._dataObjectComponents.clear()
-		console.log('length', this.dataObject.length)
 		for(let dataObject of this.dataObject){
 			this._add(this._createItemComponent(dataObject))
 		}

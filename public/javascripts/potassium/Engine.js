@@ -14,10 +14,11 @@ let Engine = class {
 		this.camera = camera
 		this.scene.add(this.camera)
 
+		/*
 		this.glCanvas = el.canvas().appendTo(this._el)
 		this.glContext = this.glCanvas.getContext('webgl')
 		if(this.glContext === null){
-			throw new Error('Could not create GL context')
+			//throw new Error('Could not create GL context')
 		}
 		this.renderer = new THREE.WebGLRenderer({
 			canvas: this.glCanvas,
@@ -25,6 +26,7 @@ let Engine = class {
 			antialias: false,
 			alpha: false
 		})
+		*/
 		//this.renderer.autoClear = true
 
 		this.session = null // An XRSession

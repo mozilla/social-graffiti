@@ -2,6 +2,7 @@
 	--main-nav-height: 45px;
 	--main-nav-margin: 30px;
 	--row-padding: 20px;
+	--max-width: 340px;
 }
 
 body, html, div, p, span, a, h1, h2, h3, h4, h5, input, textarea, ul, li {
@@ -186,7 +187,7 @@ button:active, .button:active {
 
 .login-component .form-group {
 	width: 100%;
-	max-width: 25em;
+	max-width: var(--max-width);
 	margin-bottom: 90px;
 }
 .login-component .form-group input[type=text], .login-component .form-group input[type=email] {
@@ -264,7 +265,7 @@ button:active, .button:active {
 	padding: 8px;
 	border: solid 1px #EFEFEF;
 	width: 100%;
-	max-width: 340px;
+	max-width: var(--max-width);
 }
 .nearby-painting-item .name {
 	font-size: 18px;
@@ -276,6 +277,26 @@ button:active, .button:active {
 	font-size: 14px;
 	height: 26px;
 	line-height: 29px;
+	background-color: green;
+	color: white;
+}
+
+.save-painting-component h2 {
+	margin-bottom: 10px;
+}
+.save-painting-component form {
+	width: 100%;
+	max-width: var(--max-width);
+}
+.save-painting-component .buttons {
+	margin-top: 8px;
+	text-align: right;
+}
+.save-painting-component .buttons button {
+	margin-left: 10px;
+}
+
+.save-painting-component .save-button {
 	background-color: green;
 	color: white;
 }

@@ -10,5 +10,6 @@ While it may, at first glace, appear to be a production-ready anchor name servic
 
 	cd social-graffiti
 	npm install
+	npm run-script build // Creates public/site.js for browsers that don't support ES6 modules
 	DEBUG=social-graffiti:* npm start
 

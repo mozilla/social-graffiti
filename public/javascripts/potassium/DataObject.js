@@ -119,6 +119,9 @@ let DataObject = EventMixin(
 					options.method = 'put'
 				}
 				options.body = JSON.stringify(this.data)
+				var headers = new Headers()
+				headers.set('Content-Type', 'application/json')
+				options.headers = headers
 				fetch(this.url, options).then(response => {
 					if(response.status != 200){
 						throw 'Save failed with status ' + response.status

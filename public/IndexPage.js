@@ -1,10 +1,10 @@
-import el from '../javascripts/potassium/El.js'
-import obj from '../javascripts/potassium/Obj.js'
-import Page from '../javascripts/potassium/Page.js'
-import Engine from '../javascripts/potassium/Engine.js'
-import Component from '../javascripts/potassium/Component.js'
-import DataObject from '../javascripts/potassium/DataObject.js'
-import CollectionComponent from '../javascripts/potassium/CollectionComponent.js'
+import el from './javascripts/potassium/El.js'
+import obj from './javascripts/potassium/Obj.js'
+import Page from './javascripts/potassium/Page.js'
+import Engine from './javascripts/potassium/Engine.js'
+import Component from './javascripts/potassium/Component.js'
+import DataObject from './javascripts/potassium/DataObject.js'
+import CollectionComponent from './javascripts/potassium/CollectionComponent.js'
 
 import LoginComponent from './javascripts/components/LoginComponent.js'
 import SplashComponent from './javascripts/components/SplashComponent.js'
@@ -14,7 +14,7 @@ import SavePaintingComponent from './javascripts/components/SavePaintingComponen
 
 import {User} from './javascripts/models/User.js'
 
-export default class IndexPage extends Page {
+let IndexPage = class extends Page {
 	constructor(){
 		super()
 		this.el.addClass('index-page')
@@ -105,3 +105,7 @@ export default class IndexPage extends Page {
 		this.splashComponent.el.style.display = ''
 	}
 }
+
+export default IndexPage
+
+window.IndexPage = IndexPage

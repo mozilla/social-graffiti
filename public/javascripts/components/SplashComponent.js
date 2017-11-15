@@ -42,7 +42,7 @@ export default class SplashComponent extends Component {
 	_updateSearch(){
 		if(this._currentCoordinates === null){
 			this._contents.removeLocationFilter()
-			this._contents.reset()
+			this._contents.reset([])
 			return
 		}
 		this._contents.addLocationFilter(this._currentCoordinates.latitude, this._currentCoordinates.longitude, 100)
