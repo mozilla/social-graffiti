@@ -5,19 +5,16 @@ const router = express.Router();
 
 /* Create a User */
 router.post('/', (req, res, next) => {
-  console.log('req', req.body.email)
   if(!req.body.email){
     res.status(400)
     return
   }
   db.User.findOne({ where: { email: req.body.email }}).then(user => {
-    console.log('Found an existing email address', user)
     if(user !== null){
       res.status(400).send('Can not create, found an existing email address')
       return
     }
     db.User.create({ email: req.body.email }).then(user => {
-      console.log('created', user.uuid, user.code)
       res.status(200).json({
         uuid: user.uuid,
         code: user.code

@@ -11,7 +11,7 @@ Fields:
     transform: column major 4x4 affine transform matrix (taken from AnchoredContent)
 */
 module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('Content', {
+	return sequelize.define('content', {
 		uuid: { type: DataTypes.STRING, primaryKey: true, defaultValue: uuid },
 		name: { type: DataTypes.STRING }
 	});

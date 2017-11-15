@@ -15,7 +15,7 @@ Fields:
     orientation: (x, y, z, w)
 */
 module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('Anchor', {
+	return sequelize.define('anchor', {
 		uuid:  { type: DataTypes.STRING, primaryKey: true, defaultValue: uuid },
 		latitude: { type: DataTypes.FLOAT },
 		longitude: { type: DataTypes.FLOAT },
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 		orientation: {
 			type: DataTypes.STRING,
 			get(){
-				return convertFromString(this.getDataValue('orientation'))
+				return convertToArray(this.getDataValue('orientation'))
 			},
 			set(val){
 				this.setDataValue('orientation', convertFromArray(val))

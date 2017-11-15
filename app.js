@@ -8,6 +8,7 @@ const Sequelize = require('sequelize');
 
 // Require the routes
 const users = require('./routes/users');
+const anchors = require('./routes/anchors');
 
 // Start the DB
 const {db} = require('./db/sequelize');
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Set up the routes
 app.use('/api/user', users);
+app.use('/api/anchor', anchors);
 
 // Serve static HTML
 var options = {
