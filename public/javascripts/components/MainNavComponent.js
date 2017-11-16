@@ -38,7 +38,6 @@ export default class MainNavComponent extends Component {
 		this.addRightLink('#login', 'login', 'nav-login')
 	}
 	_handleAuthenticationChange(eventName, user, authenticated){
-		console.log('Auth changed', user, authenticated)
 		if(authenticated){
 			this._showAuthed()
 		} else {

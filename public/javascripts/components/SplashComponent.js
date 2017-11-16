@@ -33,11 +33,20 @@ export default class SplashComponent extends Component {
 		this.nearbyPaintings.el.addClass('nearby-paintings')
 		this.el.appendChild(this.nearbyPaintings.el)
 
+		this.spinner = el.div({ class: 'spinner' }, 'Working...').appendTo(this.el)
+		
 		this._checkAuthed()
 		this.dataObject.addListener(()=> {
 			this._checkAuthed()
 		}, User.AUTHENTICATION_CHANGE)
 		this._updateLocation()
+	}
+	_toggleSpinner(show){
+		if(show){
+			this.spinner.style.display = ''
+		} else {
+			this.spinner.style.display = 'none'
+		}
 	}
 	_updateSearch(){
 		if(this._currentCoordinates === null){
@@ -46,7 +55,13 @@ export default class SplashComponent extends Component {
 			return
 		}
 		this._contents.addLocationFilter(this._currentCoordinates.latitude, this._currentCoordinates.longitude, 100)
-		this._contents.fetch()
+		this._toggleSpinner(true)
+		this._contents.fetch().then(() => {
+			this._toggleSpinner(false)
+		}).catch(err => {
+			console.error('Error fetching contents', err)
+			this._toggleSpinner(false)
+		})
 	}
 	_updateLocation(){
 		return new Promise((resolve, reject) => {

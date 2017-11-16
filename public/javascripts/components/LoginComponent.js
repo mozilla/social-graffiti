@@ -48,13 +48,21 @@ export default class LoginComponent extends Component {
 			console.log('joined')
 			this.joinError.innerHTML = ''
 			this.linkError.innerHTML = ''
-			document.location.href = '#'
+			this._handleFinalRedirect()
 		}).catch(err => {
 			this.joinError.innerHTML = 'Couldn\'t join with that address: ' + emailValue
 			this.linkError.innerHTML = ''
 			console.error('Could not join', err)
 		})
 		return false
+	}
+	_handleFinalRedirect(){
+		let contentURL = (new URL(document.location)).searchParams.get('url')
+		if(contentURL){
+			document.location.href = `/?url=${encodeURIComponent(contentURL)}#save-painting`
+		} else {
+			document.location.href = '#'
+		}
 	}
 	_handleLinkClick(ev){
 		ev.preventDefault()
@@ -65,7 +73,7 @@ export default class LoginComponent extends Component {
 			console.log('linked')
 			this.joinError.innerHTML = ''
 			this.linkError.innerHTML = ''
-			document.location.href = '#'
+			this._handleFinalRedirect()
 		}).catch(err => {
 			this.joinError.innerHTML = ''
 			this.linkError.innerHTML = 'Couldn\'t link with that code: ' + code
