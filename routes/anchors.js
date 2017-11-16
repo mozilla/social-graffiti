@@ -30,10 +30,13 @@ router.get('/', (request, response, next) => {
 });
 
 router.post('/', (request, response, next) => {
-  if(!request.body.url || !request.body.latitude || !request.body.longitude || !request.body.altitude || !request.body.positionAccuracy || !request.body.altitudeAccuracy){
-    console.error('Bad anchor post', request.body)
-    response.status(400)
-    return
+  let expectedFields = ['url', 'latitude', 'longitude', 'altitude', 'positionAccuracy', 'altitudeAccuracy']
+  for(let field of expectedFields){
+    if(typeof request.body[field] === 'undefined' || request.body[field] === ''){
+      console.error('Bad anchor post, expected', field, 'in', request.body)
+      response.status(400)
+      return
+    }
   }
   getUserFromRequest(request).then(user => {
     if(user === null){

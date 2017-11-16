@@ -6,6 +6,20 @@ While it may, at first glace, appear to be a production-ready anchor name servic
 
 *This is a prototype built quickly for a single demo.*
 
+
+## Configuring a Glitch.com project
+
+Create a new project, then open a terminal to that project and run:
+
+	cd /app/
+	rm -rf node_modules package.json public README.md server.js views
+	git init .
+	git remote add -t \* -f origin https://github.com/mozilla/social-graffiti.git
+	git checkout master
+	npm install
+	npm run-script build
+
+
 ## Setting up on CentOS / Amazon Linux
 
 	sudo yum install -y gcc-c++ make git
@@ -20,10 +34,8 @@ While it may, at first glace, appear to be a production-ready anchor name servic
 	npm install
 	npm run-script build
 
-## Running
+### Running
 
 	cd /www/social-graffiti
 	# export DEBUG=social-graffiti.*
 	npm start
-
-
