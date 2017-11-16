@@ -6,10 +6,24 @@ While it may, at first glace, appear to be a production-ready anchor name servic
 
 *This is a prototype built quickly for a single demo.*
 
-## Running
+## Setting up on CentOS / Amazon Linux
 
+	sudo yum install -y gcc-c++ make git
+	curl --silent --location https://rpm.nodesource.com/setup_6.x | sudo bash -
+	sudo yum install -y nodejs
+	sudo npm install npm@latest -g
+	sudo mkdir /www
+	sudo chown ec2-user:ec2-user /www
+	cd /www
+	git clone https://github.com/mozilla/social-graffiti.git
 	cd social-graffiti
 	npm install
-	npm run-script build // Creates public/site.js for browsers that don't support ES6 modules
-	DEBUG=social-graffiti:* npm start
+	npm run-script build
+
+## Running
+
+	cd /www/social-graffiti
+	# export DEBUG=social-graffiti.*
+	npm start
+
 
