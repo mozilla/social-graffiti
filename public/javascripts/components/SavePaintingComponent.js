@@ -77,6 +77,12 @@ export default class SavePaintingComponent extends Component {
 	}
 	_handleCancel(ev){
 		ev.preventDefault()
+		let contentURL = (new URL(document.location)).searchParams.get('url');
+		if(!contentURL){
+			document.location = '/#'
+		} else {
+			document.location = `/paint/?url=${encodeURIComponent(contentURL)}`
+		}
 		return false
 	}
 }

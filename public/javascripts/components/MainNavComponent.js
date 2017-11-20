@@ -14,7 +14,7 @@ export default class MainNavComponent extends Component {
 		this.el.addClass('main-nav-component')
 		this.navEl = el.nav().appendTo(this.el)
 		this.siteNameEl = el.a(
-			{ href: '#' },
+			{ href: '/#' },
 			el.h1('Social graffiti')
 		).appendTo(this.navEl)
 
@@ -31,7 +31,7 @@ export default class MainNavComponent extends Component {
 	}
 	_showAuthed(){
 		this.rightLinks.innerHTML = ''
-		this.addRightLink('#account', 'account', 'nav-account')
+		this.addRightLink('/#account', 'account', 'nav-account')
 	}
 	_showUnauthed(){
 		this.rightLinks.innerHTML = ''
