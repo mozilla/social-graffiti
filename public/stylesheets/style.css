@@ -46,7 +46,7 @@ button, .button {
 	background-color: white;
 	padding: 5px;
 	border: solid 1px #DDD;
-	border-radius: 0;
+	border-radius: 10px;
 }
 button:hover, .button:hover {
 	background-color: #DDD;
@@ -154,7 +154,6 @@ button:active, .button:active {
 	margin-bottom: var(--main-nav-margin);
 	background-color: #EFEFEF;
 	color: #888;
-	opacity: 0.5;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -236,17 +235,25 @@ button:active, .button:active {
 }
 
 .splash-component .paint-button {
-	font-size: 20px;
+	height: 18px;
+	font-size: 30px;
 	line-height: 20px;
 	display: inline-block;
 	font-weight: 400;
 	padding: 30px;
 	color: white;
 	text-align: center;
-	background-color: green;
 	margin: 30px 0 50px 0;
 	width: 100%;
 	max-width: 300px;
+
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff0000+0,0000ff+100 */
+	background: #ff0000; /* Old browsers */
+	background: -moz-linear-gradient(left, #ff0000 0%, #0000ff 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #ff0000 0%,#0000ff 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #ff0000 0%,#0000ff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#0000ff',GradientType=1 ); /* IE6-9 */
+
 }
 
 .splash-component .welcome-message {
@@ -275,10 +282,11 @@ button:active, .button:active {
 }
 .nearby-painting-item .edit-button {
 	float: right;
+	padding: 5px 20px;
 	font-size: 14px;
 	height: 39px;
 	line-height: 43px;
-	background-color: green;
+	background-color: blue;
 	color: white;
 }
 
@@ -298,6 +306,6 @@ button:active, .button:active {
 }
 
 .save-painting-component .save-button {
-	background-color: green;
+	background-color: blue;
 	color: white;
 }
