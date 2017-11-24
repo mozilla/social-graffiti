@@ -98,7 +98,7 @@ export {User, Users}
 function getCodeCookie(){ return getCookie(codeCookieName) }
 
 function setCodeCookie(code){
-	document.cookie = codeCookieName + '=' + encodeURIComponent(code)
+	document.cookie = codeCookieName + '=' + encodeURIComponent(code) + '; expires=Fri, 01 Jan 2100 00:00:00 GMT'
 }
 
 function removeCodeCookie(){
